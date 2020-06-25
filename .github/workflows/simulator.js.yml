@@ -23,5 +23,5 @@ jobs:
     - name: Add subtree
       run: git subtree add https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
     - name: Deploy backend to heroku
-      run: git subtree push --prefix=dist heroku master
+      run: git subtree push --prefix=simulador/dist heroku master
 
