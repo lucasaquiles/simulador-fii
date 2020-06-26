@@ -28,7 +28,7 @@
       </div>
       <div class="md-layout-item">
         <md-field>
-          <label>Aporte mensal</label>
+          <label>Quantidade</label>
           <md-input v-model="simulation.amount" v-on:keyup="update"></md-input>
         </md-field>
       </div>
