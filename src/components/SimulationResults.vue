@@ -19,7 +19,7 @@
                 </md-card>
               </div>
           
-        <p>* as informações consideram apenas o último rendimento pago de cada FII</p>
+        <p v-if="simulationResults.length > 0">* as informações consideram apenas o último rendimento pago de cada FII</p>
     </div>
 </template>
 
