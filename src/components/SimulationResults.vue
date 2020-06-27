@@ -33,3 +33,13 @@ export default {
   }
 }
 </script>
+
+<style lang="css" scoped>
+    
+    .md-card {
+      width: 250px;
+      margin: 4px;
+      display: inline-block;
+      vertical-align: top;
+    }
+  </style>
