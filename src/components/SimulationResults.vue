@@ -1,26 +1,25 @@
 <template>
     <div>
-        <md-table>
-            <md-table-row>
-                <md-table-head>FII</md-table-head>
-                <md-table-head>Valor da ação</md-table-head>
-                <md-table-head>Dividendo pago por cota</md-table-head>
-                <md-table-head>Quantidade de cotas</md-table-head>
-                <md-table-head>Período (em meses)</md-table-head>
-                <md-table-head>Dividendos</md-table-head>
-                <md-table-head>Investimento total</md-table-head>
-            </md-table-row>
-
-            <md-table-row v-for="item in simulationResults" :key="item.fiiCodeSelected">
-                <md-table-cell>{{item.fiiCodeSelected}}</md-table-cell>
-                <md-table-cell>{{item.price.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })}}</md-table-cell>
-                <md-table-cell>{{item.yeldValue.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })}}</md-table-cell>
-                <md-table-cell>{{item.amount}}</md-table-cell>
-                <md-table-cell>{{item.period}}</md-table-cell>
-                <md-table-cell>{{item.totalYeld.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })}}</md-table-cell>
-                <md-table-cell>{{item.totalInvestiment.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })}}</md-table-cell>
-            </md-table-row>
-        </md-table>
+    
+            <div class="md-primary">
+                <md-card v-for="item in simulationResults" :key="item.fiiCodeSelected" md-theme="green-card">
+                  
+                  <md-card-header>
+                    <div class="md-title">{{item.fiiCodeSelected}}</div>
+                    <div class="md-subhead">
+                        {{item.totalInvestiment.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })}}
+                        <span>({{item.price.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })}} por cota)</span>
+                    </div>
+                  </md-card-header>
+                  <md-card-expand>     
+                      <md-card-content>
+                       {{item.totalYeld.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })}}* em dividendos por {{item.period}} meses
+                      </md-card-content>
+                  </md-card-expand>
+                </md-card>
+              </div>
+          
+        <p>* as informações consideram apenas o último rendimento pago de cada FII</p>
     </div>
 </template>
 
