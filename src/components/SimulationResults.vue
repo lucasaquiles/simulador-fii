@@ -3,16 +3,19 @@
             
         
             
-            <md-card style="padding:10px; display: inline-block; width: 508px;" class="md-elevation-1">
+            <md-card style="padding:10px; width: 508px;">
+              <md-card-header>
               <span class="md-title">Resumo</span>   
-              
-              <md-content>
-                <p>Dividendos ao mês: {{getTotal().toCurrencyFormat()}}</p>
-              </md-content>
-              <md-content>
-                
-                <p>Investimento acumulado: {{getTotalInvestimento().toCurrencyFormat()}}</p>
-              </md-content>
+            </md-card-header>
+              <md-card-content>
+                <div class="md-layout-item">
+                  Dividendos ao mês: <strong>{{getTotal().toCurrencyFormat()}}
+                    <spam class="md-caption">({{getPercentageTotal()}}% a.m)</spam></strong>
+                </div>
+                <div class="md-layout-item">
+                  Investimento acumulado: <strong>{{getTotalInvestimento().toCurrencyFormat()}}</strong>
+                </div>
+              </md-card-content>
               
             </md-card>  
             
@@ -34,7 +37,7 @@
                 </md-card>
               </div>
           
-        <p v-if="simulationResults.length > 0">* as informações consideram apenas o último rendimento pago de cada FII</p>
+        <p v-if="simulationResults.length > 0" class="md-caption">* as informações consideram apenas o último rendimento pago de cada FII</p>
     </div>
 </template>
 
@@ -60,13 +63,20 @@ export default {
         return total + (item.price * item.amount)
       }),0);
     },
+    getPercentageTotal() {
+      //
+      const percentage = (this.getTotal() / this.getTotalInvestimento()) * 100;
+      return percentage.toFixed(2)
+    }
   }
 
 }
 </script>
 
 <style lang="css" scoped>
-   
+   .left{
+     text-align: left;
+   }
     .md-card {
       width: 250px;
       margin: 4px;
