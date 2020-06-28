@@ -16,3 +16,11 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
+String.prototype.toCurrencyFormat = function() {
+  return this.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })
+}
+
+Number.prototype.toCurrencyFormat = function() {
+  return this.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })
+}
