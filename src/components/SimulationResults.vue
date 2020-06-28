@@ -1,20 +1,23 @@
 <template>
     <div>
-            <div class="md-primary">
-             
-                <md-card v-if="simulationResults.length > 0">
-                  <md-card-header>
-                    <div class="md-title">Resumo</div>
-                  </md-card-header>
-                  <md-card-content>
-                    <div>Dividendos ao mês: {{getTotal().toCurrencyFormat()}}</div>
-                    <div>Investimento acumulado: {{getTotalInvestimento().toCurrencyFormat()}}</div>
-                  </md-card-content>
-                </md-card>
-             
-            </div>
-            <div class="md-primary">
-                <md-card v-for="item in simulationResults" :key="item.fiiCodeSelected" md-theme="green-card">
+            
+        
+            
+            <md-card style="padding:10px; display: inline-block; width: 508px;" class="md-elevation-1">
+              <span class="md-title">Resumo</span>   
+              
+              <md-content>
+                <p>Dividendos ao mês: {{getTotal().toCurrencyFormat()}}</p>
+              </md-content>
+              <md-content>
+                
+                <p>Investimento acumulado: {{getTotalInvestimento().toCurrencyFormat()}}</p>
+              </md-content>
+              
+            </md-card>  
+            
+            <div>
+                <md-card v-for="item in simulationResults" :key="item.fiiCodeSelected" class="md-dark-ligth">
                   
                   <md-card-header>
                     <div class="md-title">{{item.fiiCodeSelected.toUpperCase()}}</div>
@@ -41,8 +44,7 @@ export default {
   name: 'Calculator',
   props: ['simulationResults'],
   data () { return {
-    total: 0.0,
-    simulationResults: this.simulationResults
+    total: 0.0
     }
   },
   methods: {

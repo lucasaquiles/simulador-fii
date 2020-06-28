@@ -1,23 +1,23 @@
 <template>
   <div>
     <div v-if="loading">
-      buscando {{simulation.fiiCodeSelected}}
+      <md-progress-spinner class="md-accent" :md-diameter="30" md-mode="indeterminate">asdfads</md-progress-spinner>
     </div>
     <div v-if="edited">
-      <p>Com {{simulation.toCurrencyFormat()}} investido ,em <strong>{{simulation.period}}</strong> mês renderá <strong>{{simulation.totalYeld.toCurrencyFormat()}}</strong> em dividendos</p>
+      <p>Com {{simulation.totalInvestiment.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })}} investido em <strong>{{simulation.period}}</strong> {{simulation.period > 1? 'meses': 'mês'}} renderá <strong>{{simulation.totalYeld.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })}}</strong> em dividendos</p>
     </div>
 
     <div class="md-layout-item md-layout md-gutter">
       <div class="md-layout-item">
         <md-field>
           <label>Código da ação</label>
-          <md-input v-model="simulation.fiiCodeSelected" v-on:keyup="getFiis"></md-input>
+          <md-input v-model="simulation.fiiCodeSelected" v-on:blur="getFiis"></md-input>
         </md-field>
       </div>
 
       <div class="md-layout-item">
         <md-field>
-          <label>Valor</label>
+          <label>Cotação</label>
           <md-input v-model="simulation.price" readonly></md-input>
         </md-field>
       </div>
