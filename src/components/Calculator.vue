@@ -4,7 +4,7 @@
       buscando {{simulation.fiiCodeSelected}}
     </div>
     <div v-if="edited">
-      <p>Com {{simulation.totalInvestiment.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })}} investido ,em <strong>{{simulation.period}}</strong> mês renderá <strong>{{simulation.totalYeld.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })}}</strong> em dividendos</p>
+      <p>Com {{simulation.toCurrencyFormat()}} investido ,em <strong>{{simulation.period}}</strong> mês renderá <strong>{{simulation.totalYeld.toCurrencyFormat()}}</strong> em dividendos</p>
     </div>
 
     <div class="md-layout-item md-layout md-gutter">
@@ -35,8 +35,8 @@
       </div>
     </div>
     
-    <md-button class="md-raised md-primary" v-if="!edited" disabled>Salvar simulação </md-button>
-    <md-button class="md-raised md-primary" v-on:click="add()" v-if="edited">Salvar simulação</md-button>
+    <md-button class="md-raised md-primary" v-if="!edited" disabled>Adicionar </md-button>
+    <md-button class="md-raised md-primary" v-on:click="add()" v-if="edited">Adicionar</md-button>
   </div>
 </template>
 
