@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="loading">
-      <md-progress-spinner class="md-accent" :md-diameter="30" md-mode="indeterminate">asdfads</md-progress-spinner>
+      <md-progress-spinner class="md-accent" :md-diameter="30" md-mode="indeterminate"></md-progress-spinner>
     </div>
     <div v-if="edited">
       <p>Com {{simulation.totalInvestiment.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })}} investido em <strong>{{simulation.period}}</strong> {{simulation.period > 1? 'meses': 'mês'}} renderá <strong>{{simulation.totalYeld.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })}}</strong> em dividendos</p>

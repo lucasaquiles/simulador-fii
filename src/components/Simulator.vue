@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="md-layout-item">
-                    <SimulationResults v-bind="store" />
+                    <SimulationResults :simulationResults="store.simulationResults" />
                 </div>
             </div>
         </md-card-content>

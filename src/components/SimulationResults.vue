@@ -1,86 +1,76 @@
 <template>
-    <div>
-            
-        
-            
-            <md-card style="padding:10px; width: 508px;">
-              <md-card-header>
-              <span class="md-title">Resumo</span>   
-            </md-card-header>
-              <md-card-content>
-                <div class="md-layout-item">
-                  Dividendos ao mês: <strong>{{getTotal().toCurrencyFormat()}}
-                    <spam class="md-caption">({{getPercentageTotal()}}% a.m)</spam></strong>
-                </div>
-                <div class="md-layout-item">
-                  Investimento acumulado: <strong>{{getTotalInvestimento().toCurrencyFormat()}}</strong>
-                </div>
-              </md-card-content>
-              
-            </md-card>  
-            
-            <div>
-                <md-card v-for="item in simulationResults" :key="item.fiiCodeSelected" class="md-dark-ligth">
-                  
-                  <md-card-header>
-                    <div class="md-title">{{item.fiiCodeSelected.toUpperCase()}}</div>
-                    <div class="md-subhead">
-                        {{item.totalInvestiment.toCurrencyFormat()}}
-                        <span>({{item.price.toCurrencyFormat()}} por cota)</span>
-                    </div>
-                  </md-card-header>
-                  <md-card-expand>     
-                      <md-card-content>
-                       {{item.totalYeld.toCurrencyFormat()}}* em dividendos por {{item.period}} meses
-                      </md-card-content>
-                  </md-card-expand>
-                </md-card>
+  <div>
+    <Summary :simulationResults="simulationResults" />
+    <div class="simulation-list">
+      <div  v-for="item in simulationResults" :key="item.fiiCodeSelected">
+        <md-card class="md-dark-ligth">
+          <md-card-content>
+            <div class="content-list">
+              <div class="stock-info">
+                <div class="md-headline"> {{item.fiiCodeSelected.toUpperCase()}}  </div>
+                <div class="md-caption">({{item.price.toCurrencyFormat()}})</div>
               </div>
-          
-        <p v-if="simulationResults.length > 0" class="md-caption">* as informações consideram apenas o último rendimento pago de cada FII</p>
+              <div class="wrap-content">
+                <div class="md-title">{{item.totalYeld.toCurrencyFormat()}}* em dividendos no período de {{item.period}} {{item.period > 1? 'meses': 'mês'}} </div>
+                <div class="md-subheading">{{item.totalInvestiment.toCurrencyFormat()}} ({{item.price.toCurrencyFormat()}} por cota)</div>
+              </div>
+            </div>
+          </md-card-content>
+        </md-card>
+      </div>
     </div>
+
+    <p v-if="simulationResults.length > 0" class="md-caption">* as informações consideram apenas o último rendimento
+      pago de cada FII</p>
+  </div>
 </template>
 
 <script>
 
-export default {
-  name: 'Calculator',
-  props: ['simulationResults'],
-  data () { return {
-    total: 0.0
-    }
-  },
-  methods: {
-    getTotal () {
-      
-      return this.simulationResults.reduce(((total, item) => {
-        return total + (item.yeldValue * item.amount)
-      }),0);
+  import Summary from './Summary.vue'
+
+  export default {
+    name: 'Calculator',
+    components: {
+      Summary
     },
-    getTotalInvestimento () {
-      
-      return this.simulationResults.reduce(((total, item) => {
-        return total + (item.price * item.amount)
-      }),0);
-    },
-    getPercentageTotal() {
-      //
-      const percentage = (this.getTotal() / this.getTotalInvestimento()) * 100;
-      return percentage.toFixed(2)
+    props: ['simulationResults'],
+    data() {
+      return {
+        total: 0
+      }
     }
   }
-
-}
 </script>
 
 <style lang="css" scoped>
-   .left{
-     text-align: left;
-   }
-    .md-card {
-      width: 250px;
-      margin: 4px;
-      display: inline-block;
-      vertical-align: top;
-    }
-  </style>
+  
+  .simulation-list{
+    
+  }
+  .stock-info .md-headline{
+    color:#4F86C6
+  }
+  .simulation-list .md-card{
+    margin:10px 0
+  }
+  .content-list{
+    display: flex;
+  }
+  .content-list .stock-info{
+    width: 100px;
+    text-align: left;
+  }
+  .wrap-content .md-title{
+    color:#333;
+    font-size: 20px;
+  }
+  .wrap-content .md-subheading{
+    color:#777
+  }
+  .content-list .wrap-content{
+    padding-top: 0;
+    padding-left: 20px;
+    text-align: left;
+  }
+</style>
