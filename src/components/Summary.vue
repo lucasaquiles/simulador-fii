@@ -1,31 +1,31 @@
 <template>
   <div class="md-layout md-gutter " v-if="simulationResults.length > 0">
     <div class="md-layout-item">
-      <md-card class="summary-card">
+      <div class="md-card summary-card">
         <div class="md-card-content">
           <div class="md-subhead">Dividendos</div>
           <div class="md-title">{{calculaTotalDividendosMes().toCurrencyFormat()}}</div>
           <span class="md-caption">({{calculaPorcentagemDividendosMes()}}% a.m)</span>
         </div>
-      </md-card>
+      </div>
     </div>
     <div class="md-layout-item">
-      <md-card class="summary-card">
+      <div class="md-card summary-card">
         <div class="md-card-content">
           <div class="md-subhead">Dividendos</div>
           <div class="md-title">{{calculaTotalNoPeriodoInformado().toCurrencyFormat()}}</div>
           <span class="md-caption">({{calculaPorcentagemPeriodo()}}% a.a)</span>
         </div>
-      </md-card>
+      </div>
     </div>
     <div class="md-layout-item">
-      <md-card class="summary-card">
+      <div class="md-card summary-card">
         <div class="md-card-content">
           <div class="md-subhead">Total acumulado</div>
           <div class="md-title">{{getTotalInvestimento().toCurrencyFormat()}}</div>
           <span class="md-caption"> &nbsp; </span>
         </div>
-      </md-card>
+      </div>
     </div>
   </div>
 </template>
@@ -65,7 +65,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
   .summary-card {
     width: 100%;
