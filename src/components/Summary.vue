@@ -65,7 +65,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style scoped>
 
   .summary-card {
     width: 100%;
@@ -84,5 +84,4 @@ export default {
     color: #fff;
   }
 
-  .summary-card {}
 </style>
