@@ -7,7 +7,7 @@
         </md-card-header>
 
         <md-card-content>
-            <div class="md-layout-item md-layout md-gutter">
+            <div class="md-layout-item ">
                 <div class="md-layout-item">
                     <Calculator v-bind="store" />
                 </div>
