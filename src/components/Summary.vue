@@ -1,6 +1,5 @@
 <template>
   <div class="md-layout md-gutter " >
-    
     <div class="md-layout-item">
       <md-card class="summary-card">
         <md-card-content>
@@ -32,39 +31,38 @@
 </template>
 <script>
 
-  export default {
-    name: 'Summary',
-    props: ['simulationResults'],
-    data() {
-      return this.simulationResults
+export default {
+  name: 'Summary',
+  props: ['simulationResults'],
+  data () {
+    return this.simulationResults
+  },
+  methods: {
+    calculaTotalDividendosMes () {
+      return this.simulationResults.reduce((total, item) => {
+        return total + (item.yeldValue * item.amount)
+      }, 0)
     },
-    methods: {
-      calculaTotalDividendosMes() {
-
-        return this.simulationResults.reduce(((total, item) => {
-          return total + (item.yeldValue * item.amount)
-        }), 0);
-      },
-      calculaTotalNoPeriodoInformado() {
-        return this.simulationResults.reduce(((total, item) => {
-          return total + ((item.yeldValue * item.amount) * 12) 
-        }), 0);
-      },
-      calculaPorcentagemPeriodo() {
-        const percentage = (this.calculaTotalNoPeriodoInformado() / this.getTotalInvestimento()) * 100;
-        return percentage.toFixed(2)
-      },
-      getTotalInvestimento() {
-        return this.simulationResults.reduce(((total, item) => {
-          return (total + (item.price * item.amount)) + this.calculaTotalDividendosMes()
-        }), 0);
-      },
-      calculaPorcentagemDividendosMes() {
-        const percentage = (this.calculaTotalDividendosMes() / this.getTotalInvestimento()) * 100;
-        return percentage.toFixed(2)
-      }
+    calculaTotalNoPeriodoInformado () {
+      return this.simulationResults.reduce((total, item) => {
+        return total + ((item.yeldValue * item.amount) * 12)
+      }, 0)
+    },
+    calculaPorcentagemPeriodo () {
+      const percentage = (this.calculaTotalNoPeriodoInformado() / this.getTotalInvestimento()) * 100
+      return percentage.toFixed(2)
+    },
+    getTotalInvestimento () {
+      return this.simulationResults.reduce((total, item) => {
+        return (total + (item.price * item.amount)) + this.calculaTotalDividendosMes()
+      }, 0)
+    },
+    calculaPorcentagemDividendosMes () {
+      const percentage = (this.calculaTotalDividendosMes() / this.getTotalInvestimento()) * 100
+      return percentage.toFixed(2)
     }
   }
+}
 </script>
 
 <style lang="css" scoped>
@@ -87,11 +85,4 @@
   }
 
   .summary-card {}
-
-  /* .md-card {
-    width: 250px;
-    margin: 4px;
-    display: inline-block;
-    vertical-align: top;
-  } */
 </style>

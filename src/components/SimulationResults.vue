@@ -19,7 +19,6 @@
         </md-card>
       </div>
     </div>
-
     <p v-if="simulationResults.length > 0" class="md-caption">* as informações consideram apenas o último rendimento
       pago de cada FII</p>
   </div>
@@ -27,27 +26,23 @@
 
 <script>
 
-  import Summary from './Summary.vue'
+import Summary from './Summary.vue'
 
-  export default {
-    name: 'Calculator',
-    components: {
-      Summary
-    },
-    props: ['simulationResults'],
-    data() {
-      return {
-        total: 0
-      }
+export default {
+  name: 'Calculator',
+  components: {
+    Summary
+  },
+  props: ['simulationResults'],
+  data () {
+    return {
+      total: 0
     }
   }
+}
 </script>
 
 <style lang="css" scoped>
-  
-  .simulation-list{
-    
-  }
   .stock-info .md-headline{
     color:#4F86C6
   }

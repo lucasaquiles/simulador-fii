@@ -18,10 +18,11 @@ new Vue({
   template: '<App/>'
 })
 
-String.prototype.toCurrencyFormat = function() {
-  return this.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })
+// eslint-disable-next-line
+String.prototype.toCurrencyFormat = function () {
+  return this.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
-
-Number.prototype.toCurrencyFormat = function() {
-  return this.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })
+// eslint-disable-next-line
+Number.prototype.toCurrencyFormat = function () {
+  return this.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }

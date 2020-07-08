@@ -1,6 +1,5 @@
 # simulator
-
-> POC usando Vue.js e MaterialDesign
+POC usando Vue.js e MaterialDesign
 [simulador-fii](https://simulador-fii.netlify.app/#/)
 
 ## Build

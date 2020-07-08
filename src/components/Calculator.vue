@@ -34,7 +34,6 @@
         </md-field>
       </div>
     </div>
-    
     <md-button class="md-raised md-primary" v-if="!edited" disabled>Adicionar </md-button>
     <md-button class="md-raised md-primary" v-on:click="add()" v-if="edited">Adicionar</md-button>
   </div>
@@ -73,33 +72,29 @@ export default {
       this.simulation.amount = 1
     },
     add () {
-      console.log("add()", this.edited)
-      if(this.edited) {
+      console.log('add()', this.edited)
+      if (this.edited) {
         const clone = JSON.parse(
           JSON.stringify(this.simulation)
         )
         this.simulationResult.push(clone)
         this.clear()
-        this.edited = false;
+        this.edited = false
       }
     },
     async getFiis () {
-      
       if (this.simulation.fiiCodeSelected.length >= 5) {
-        this.loading = true;  
-        
+        this.loading = true
         const response = await crawler.findStock(this.simulation.fiiCodeSelected.trim())
-        console.log("response: ", response);
-        
+        console.log('response: ', response)
         this.simulation.yeldValue = response.data.lastDividend
         this.simulation.price = response.data.value
-        
         this.simulation.totalYeld = 1
         this.simulation.totalYeld = this.simulation.totalYeld * this.simulation.yeldValue
         this.simulation.totalYeld = this.simulation.totalYeld * this.simulation.amount
         this.simulation.totalInvestiment = this.simulation.price * this.simulation.amount
-        this.edited = true;
-        this.loading = false;
+        this.edited = true
+        this.loading = false
         console.log(response.data)
       }
     }
