@@ -1,5 +1,5 @@
 <template>
-  <div class="md-layout md-gutter " >
+  <div class="md-layout md-gutter " v-if="simulationResults.length > 0">
     <div class="md-layout-item">
       <md-card class="summary-card">
         <md-card-content>
@@ -40,7 +40,7 @@ export default {
   methods: {
     calculaTotalDividendosMes () {
       return this.simulationResults.reduce((total, item) => {
-        return total + (item.yeldValue * item.amount)
+        return (total + (item.yeldValue * item.amount))
       }, 0)
     },
     calculaTotalNoPeriodoInformado () {
