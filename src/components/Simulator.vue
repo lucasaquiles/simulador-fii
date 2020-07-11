@@ -1,6 +1,5 @@
 <template>
     <md-card>
-        <!-- {{simulation}} -->
         <md-card-header>
             <div class="md-title">
                     <span class="md-title">Simulador de FIIs</span></div>
