@@ -7,8 +7,7 @@
           <md-card-content>
             <div class="content-list">
               <div class="stock-info">
-                <div class="md-headline"> {{item.fiiCodeSelected.toUpperCase()}}  </div>
-                <div class="md-caption">({{item.price.toCurrencyFormat()}})</div>
+                <Badge :simulationItem="item" />
               </div>
               <div class="wrap-content">
                 <div class="md-title">{{item.totalYeld.toCurrencyFormat()}}* em dividendos no período de {{item.period}} {{item.period > 1? 'meses': 'mês'}} </div>
@@ -29,30 +28,28 @@
 <script>
 
 import Summary from './Summary.vue'
+import Badge from './Badge.vue'
 
 export default {
-  name: 'Calculator',
+  name: 'SimulationResults',
   components: {
-    Summary
+    Summary, Badge
   },
   props: ['simulationResults'],
   data () {
-    return {
-      total: 0
-    }
+    console.log("data, ", this.simulationResults)
+    return this.simulationResults
   }
 }
 </script>
 
 <style lang="css" scoped>
-  .stock-info .md-headline{
-    color:#4F86C6
-  }
   .simulation-list .md-card{
     margin:10px 0
   }
   .content-list{
     display: flex;
+    position:relative;
   }
   .content-list .stock-info{
     width: 100px;
@@ -69,5 +66,13 @@ export default {
     padding-top: 0;
     padding-left: 20px;
     text-align: left;
+  }
+  .tool{
+    position: absolute;
+    top: auto;
+    right: 0;
+    width: 100px;
+    height: 50px;
+    bottom: auto;
   }
 </style>

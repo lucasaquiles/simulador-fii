@@ -9,7 +9,7 @@
         <md-card-content>
             <div class="md-layout-item ">
                 <div class="md-layout-item">
-                    <Calculator v-bind="store" />
+                    <Calculator :store="store" />
                 </div>
 
                 <div class="md-layout-item">
@@ -33,6 +33,22 @@ export default {
   },
   data () {
     return store
+  },
+  beforeMount () {
+
+    const href = document.location.href
+    if (!localStorage[href]) {
+      localStorage[href] = JSON.stringify([])
+    }
+
+    
+  },
+  mounted () {
+    const href = document.location.href
+    if (localStorage[href]) {
+        console.log("store")
+        this.store.simulationResults = JSON.parse(localStorage[href])
+    }
   }
 }
 </script>

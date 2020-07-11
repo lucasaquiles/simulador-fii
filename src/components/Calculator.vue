@@ -46,14 +46,13 @@ import crawler from '../services/Crawler'
 export default {
   name: 'Calculator',
   props: [
-    'simulationData', 'simulationResults'
+    'store'
   ],
   data () {
     return {
       loading: false,
       edited: false,
-      simulation: this.simulationData,
-      simulationResult: this.simulationResults
+      simulation: this.store.simulationData
     }
   },
   methods: {
@@ -77,10 +76,19 @@ export default {
         const clone = JSON.parse(
           JSON.stringify(this.simulation)
         )
-        this.simulationResult.push(clone)
+        this.store.simulationResults.push(clone)
         this.clear()
+        this.persist(clone)
         this.edited = false
       }
+    },
+    persist (data) {
+      const key = document.location.href
+      var currentDataInStore = JSON.parse(localStorage[key])
+      currentDataInStore.push(data)
+      // console.log("currentData", currentDataInStore);
+      // const mergedData = [...JSON.parse(currentDataInStore), data]
+      localStorage[key] = JSON.stringify(currentDataInStore)
     },
     async getFiis () {
       if (this.simulation.fiiCodeSelected.length >= 5) {

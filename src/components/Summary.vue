@@ -2,6 +2,7 @@
   <div class="md-layout md-gutter " v-if="simulationResults.length > 0">
     <div class="md-layout-item">
       <div class="md-card summary-card">
+        <div class="tool"></div>
         <div class="md-card-content">
           <div class="md-subhead">Dividendos</div>
           <div class="md-title">{{calculaTotalDividendosMes().toCurrencyFormat()}}</div>
@@ -20,6 +21,7 @@
     </div>
     <div class="md-layout-item">
       <div class="md-card summary-card">
+        <div class="tool"></div>
         <div class="md-card-content">
           <div class="md-subhead">Total acumulado</div>
           <div class="md-title">{{getTotalInvestimento().toCurrencyFormat()}}</div>
@@ -31,6 +33,8 @@
 </template>
 <script>
 
+import calculatorService from '../services/CalculatorService'
+
 export default {
   name: 'Summary',
   props: ['simulationResults'],
@@ -39,27 +43,20 @@ export default {
   },
   methods: {
     calculaTotalDividendosMes () {
-      return this.simulationResults.reduce((total, item) => {
-        return (total + (item.yeldValue * item.amount))
-      }, 0)
+      return calculatorService.calculaTotalDividendosMes(this.simulationResults)
     },
     calculaTotalNoPeriodoInformado () {
-      return this.simulationResults.reduce((total, item) => {
-        return total + ((item.yeldValue * item.amount) * 12)
-      }, 0)
+      return calculatorService.calculaTotalNoPeriodoInformado(this.simulationResults)
     },
     calculaPorcentagemPeriodo () {
       const percentage = (this.calculaTotalNoPeriodoInformado() / this.getTotalInvestimento()) * 100
       return percentage.toFixed(2)
     },
     getTotalInvestimento () {
-      return this.simulationResults.reduce((total, item) => {
-        return (total + (item.price * item.amount)) + this.calculaTotalDividendosMes()
-      }, 0)
+     return calculatorService.getTotalInvestimento(this.simulationResults)
     },
     calculaPorcentagemDividendosMes () {
-      const percentage = (this.calculaTotalDividendosMes() / this.getTotalInvestimento()) * 100
-      return percentage.toFixed(2)
+      return calculatorService.calculaPorcentagemDividendosMes(this.simulationResults)
     }
   }
 }
@@ -73,6 +70,7 @@ export default {
     background-color: #4F86C6;
     color: #fff
   }
+ 
 
   .summary-card .md-caption-subhead {
     opacity: 1;
