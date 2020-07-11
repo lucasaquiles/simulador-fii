@@ -1,4 +1,4 @@
-class CalculatorService {
+class SummaryService {
 	static calculaTotalDividendosMes (simulationResults) {
 		return simulationResults.reduce((total, item) => {
 					return (total + (item.yeldValue * item.amount))
@@ -9,8 +9,8 @@ class CalculatorService {
 			return total + ((item.yeldValue * item.amount) * 12)
 		}, 0)
 	}
-	static calculaPorcentagemPeriodo () {
-		const percentage = (this.calculaTotalNoPeriodoInformado() / this.getTotalInvestimento()) * 100
+	static calculaPorcentagemPeriodo (simulationResults) {
+		const percentage = (this.calculaTotalNoPeriodoInformado(simulationResults) / this.getTotalInvestimento(simulationResults)) * 100
 		return percentage.toFixed(2)
 	}
 	static getTotalInvestimento (simulationResults) {
@@ -25,4 +25,4 @@ class CalculatorService {
 	}
 }
 
-export default CalculatorService
+export default SummaryService

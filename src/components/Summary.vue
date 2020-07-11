@@ -33,7 +33,7 @@
 </template>
 <script>
 
-import calculatorService from '../services/CalculatorService'
+import SummaryService from '../services/SummaryService'
 
 export default {
   name: 'Summary',
@@ -43,20 +43,19 @@ export default {
   },
   methods: {
     calculaTotalDividendosMes () {
-      return calculatorService.calculaTotalDividendosMes(this.simulationResults)
+      return SummaryService.calculaTotalDividendosMes(this.simulationResults)
     },
     calculaTotalNoPeriodoInformado () {
-      return calculatorService.calculaTotalNoPeriodoInformado(this.simulationResults)
+      return SummaryService.calculaTotalNoPeriodoInformado(this.simulationResults)
     },
     calculaPorcentagemPeriodo () {
-      const percentage = (this.calculaTotalNoPeriodoInformado() / this.getTotalInvestimento()) * 100
-      return percentage.toFixed(2)
+      return SummaryService.calculaPorcentagemPeriodo(this.simulationResults)
     },
     getTotalInvestimento () {
-     return calculatorService.getTotalInvestimento(this.simulationResults)
+     return SummaryService.getTotalInvestimento(this.simulationResults)
     },
     calculaPorcentagemDividendosMes () {
-      return calculatorService.calculaPorcentagemDividendosMes(this.simulationResults)
+      return SummaryService.calculaPorcentagemDividendosMes(this.simulationResults)
     }
   }
 }
