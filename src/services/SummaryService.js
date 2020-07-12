@@ -1,7 +1,7 @@
 class SummaryService {
 	static calculaTotalDividendosMes (simulationResults) {
 		return simulationResults.reduce((total, item) => {
-					return (total + (item.yeldValue * item.amount))
+			return (total + (item.yeldValue * item.amount))
 		}, 0)
 	}
 	static calculaTotalNoPeriodoInformado (simulationResults) {
@@ -14,7 +14,6 @@ class SummaryService {
 		return percentage.toFixed(2)
 	}
 	static getTotalInvestimento (simulationResults) {
-		console.log("totalInvestimento", simulationResults);
 		return simulationResults.reduce((total, item) => {
 			return (total + (item.price * item.amount)) + this.calculaTotalDividendosMes(simulationResults)
 		}, 0)

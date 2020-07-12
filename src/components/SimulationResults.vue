@@ -1,6 +1,7 @@
 <template>
   <div>
     <Summary :simulationResults="simulationResults" />
+    <Toolbar :simulationResults="simulationResults" />
     <div class="simulation-list">
       <div  v-for="item in simulationResults" :key="item.fiiCodeSelected">
         <md-card class="md-dark-ligth">
@@ -11,7 +12,9 @@
               </div>
               <div class="wrap-content">
                 <div class="md-title">{{item.totalYeld.toCurrencyFormat()}}* em dividendos no período de {{item.period}} {{item.period > 1? 'meses': 'mês'}} </div>
-                <div class="md-subheading">{{item.totalInvestiment.toCurrencyFormat()}} ({{item.price.toCurrencyFormat()}} por cota)</div>
+                <div class="md-subheading">
+                  <span class="md-caption">{{item.totalInvestiment.toCurrencyFormat()}} ({{item.amount}} cota{{item.amount>1?'s':''}})</span>
+                </div>
               </div>
             </div>
           </md-card-content>
@@ -29,16 +32,16 @@
 
 import Summary from './Summary.vue'
 import Badge from './Badge.vue'
+import Toolbar from './Toolbar.vue'
 
 export default {
   name: 'SimulationResults',
   components: {
-    Summary, Badge
+    Summary, Badge, Toolbar
   },
   props: ['simulationResults'],
   data () {
-    console.log("data, ", this.simulationResults)
-    return this.simulationResults
+    // return this.simulationResults
   }
 }
 </script>

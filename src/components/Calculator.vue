@@ -62,7 +62,7 @@ export default {
       this.simulation.totalInvestiment = this.simulation.price * this.simulation.amount
     },
     clear () {
-      this.simulation.fiiCodeSelected = ' '
+      this.simulation.fiiCodeSelected = ''
       this.simulation.price = 0.0
       this.simulation.yeldValue = 0.0
       this.simulation.period = 1
@@ -86,8 +86,6 @@ export default {
       const key = document.location.href
       var currentDataInStore = JSON.parse(localStorage[key])
       currentDataInStore.push(data)
-      // console.log("currentData", currentDataInStore);
-      // const mergedData = [...JSON.parse(currentDataInStore), data]
       localStorage[key] = JSON.stringify(currentDataInStore)
     },
     async getFiis () {

@@ -10,7 +10,7 @@
                 <div class="md-layout-item">
                     <Calculator :store="store" />
                 </div>
-
+                </div>
                 <div class="md-layout-item">
                     <SimulationResults :simulationResults="store.simulationResults" />
                 </div>
@@ -34,19 +34,15 @@ export default {
     return store
   },
   beforeMount () {
-
     const href = document.location.href
     if (!localStorage[href]) {
       localStorage[href] = JSON.stringify([])
     }
-
-    
   },
   mounted () {
     const href = document.location.href
     if (localStorage[href]) {
-        console.log("store")
-        this.store.simulationResults = JSON.parse(localStorage[href])
+      this.store.simulationResults = JSON.parse(localStorage[href])
     }
   }
 }
