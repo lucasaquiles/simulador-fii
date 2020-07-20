@@ -16,7 +16,7 @@
                   <span class="md-caption">{{item.totalInvestiment.toCurrencyFormat()}} ({{item.amount}} cota{{item.amount>1?'s':''}})</span>
                 </div>
                 <div>
-                  <span class="md-caption"><strong>Mediana de dividendos dos ultimos 12 meses {{item.sumary.mediana}}</strong></span>
+                  <span class="md-caption">Mediana de dividendos dos últimos 12 meses: <strong>{{item.sumary.median}} </strong></span>
                 </div>
                 <table>
                     <tr>
