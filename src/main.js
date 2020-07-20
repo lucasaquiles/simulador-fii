@@ -6,8 +6,13 @@ import router from './router'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
+import VueAnalytics from 'vue-analytics'
 
 Vue.use(VueMaterial)
+Vue.use(VueAnalytics, {
+  id: 'UA-173157941-1',
+  router
+})
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

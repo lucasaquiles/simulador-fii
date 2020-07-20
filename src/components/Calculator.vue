@@ -30,12 +30,11 @@
     <md-button class="md-raised md-primary" v-if="!edited" disabled>Adicionar </md-button>
     <md-button class="md-raised md-primary" v-on:click="add()" v-if="edited">Adicionar</md-button>
   </div>
+
+  
 </template>
-
 <script>
-
 import crawler from '../services/Crawler'
-
 export default {
   name: 'Calculator',
   props: [
