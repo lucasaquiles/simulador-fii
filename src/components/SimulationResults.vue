@@ -15,6 +15,25 @@
                 <div class="md-subheading">
                   <span class="md-caption">{{item.totalInvestiment.toCurrencyFormat()}} ({{item.amount}} cota{{item.amount>1?'s':''}})</span>
                 </div>
+                <div>
+                  <span class="md-caption"><strong>Mediana de dividendos dos ultimos 12 meses {{item.sumary.mediana}}</strong></span>
+                </div>
+                <table>
+                    <tr>
+                      <th>Data de referência</th>
+                      <th>Data de pagamento</th>
+                      <th>Cotação</th>
+                      <th>Yeld</th>
+                      <th>Dividendo</th>
+                    </tr>
+                    <tr v-for="(sumaryItem, index) in item.sumary.dividendLast12Months">
+                        <td>{{sumaryItem.base}}</td>
+                        <td>{{sumaryItem.paymentDate}}</td>
+                        <td>{{sumaryItem.stockValue.toCurrencyFormat()}}</td>
+                        <td>{{sumaryItem.yeldPercentage}}%</td>
+                        <td>{{sumaryItem.rendimento.toCurrencyFormat()}}</td>
+                    </tr>
+                </table>
               </div>
             </div>
           </md-card-content>
@@ -66,9 +85,26 @@ export default {
     color:#777
   }
   .content-list .wrap-content{
+    width: 100%;
     padding-top: 0;
     padding-left: 20px;
     text-align: left;
+  }
+  .content-list .wrap-content table{
+    width:100%;
+    margin-top:10px;
+    border-collapse: collapse;
+  }
+  .content-list .wrap-content table tr{
+    border-bottom:solid 1px #e7e7e7;
+    cursor: pointer;
+  }
+  .content-list .wrap-content table tr:hover{
+    background-color: #efefef;
+    color:#555
+  }
+  .content-list .wrap-content table tr td, .content-list .wrap-content table tr th{
+    padding:5px
   }
   .tool{
     position: absolute;

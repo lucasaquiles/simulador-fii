@@ -9,34 +9,32 @@
 </template>
 
 <script>
-	export default {
-		name: 'Toolbar',
-		props: ['simulationResults'],
-		data() {
-			return {
-				storageEnabled: false
-			}
-		},
-		beforeMount () {
-			const key = document.location.href
-			this.storageEnabled = localStorage[key]?true:false
-		},
-		methods: {
-			clearStorage() {
-				const key = document.location.href
-				localStorage[key] = JSON.stringify([])
-				document.location.reload()
-			}
+export default {
+	name: 'Toolbar',
+	props: ['simulationResults'],
+	data() {
+		return {
+			storageEnabled: false
 		}
-	}
+	},
+	beforeMount () {
+		const key = document.location.href
+		this.storageEnabled = localStorage[key]?true:false
+	},
+	methods: {
+		clearStorage() {
+			const key = document.location.href
+			localStorage[key] = JSON.stringify([])
+			document.location.reload()
+		}
+  }
+}
 </script>
 
 <style type="css" scoped>
-
-	button{
-		background-color: #fff;
-		border:solid 1px #ccc;
-		border-radius: 5px;
-		cursor: pointer;
-	}
+button{
+background-color: #fff;
+border:solid 1px #ccc;
+border-radius: 5px;
+cursor: pointer;}
 </style>

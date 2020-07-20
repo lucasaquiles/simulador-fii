@@ -10,15 +10,8 @@
     <div class="md-layout-item md-layout md-gutter">
       <div class="md-layout-item">
         <md-field>
-          <label>Código da ação</label>
+          <label>Código da FI</label>
           <md-input v-model="simulation.fiiCodeSelected" v-on:blur="getFiis"></md-input>
-        </md-field>
-      </div>
-
-      <div class="md-layout-item">
-        <md-field>
-          <label>Cotação</label>
-          <md-input v-model="simulation.price" readonly></md-input>
         </md-field>
       </div>
       <div class="md-layout-item">
@@ -68,7 +61,8 @@ export default {
       this.simulation.period = 1
       this.simulation.totalYeld = 0.0
       this.simulation.totalInvestiment = 0.0
-      this.simulation.amount = 1
+      this.simulation.amount = 1,
+      this.sumary = {}
     },
     add () {
       console.log('add()', this.edited)
@@ -92,7 +86,7 @@ export default {
       if (this.simulation.fiiCodeSelected.length >= 5) {
         this.loading = true
         const response = await crawler.findStock(this.simulation.fiiCodeSelected.trim())
-        console.log('response: ', response)
+        this.simulation.sumary = response.data.sumary
         this.simulation.yeldValue = response.data.lastDividend
         this.simulation.price = response.data.value
         this.simulation.totalYeld = 1

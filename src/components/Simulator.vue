@@ -2,14 +2,13 @@
     <md-card>
         <md-card-header>
             <div class="md-title">
-                    <span class="md-title">Simulador de FIIs</span></div>
+                    <span class="md-title">Simulador de FIIs</span>
+            </div>
         </md-card-header>
-
         <md-card-content>
             <div class="md-layout-item ">
                 <div class="md-layout-item">
                     <Calculator :store="store" />
-                </div>
                 </div>
                 <div class="md-layout-item">
                     <SimulationResults :simulationResults="store.simulationResults" />
@@ -17,7 +16,6 @@
             </div>
         </md-card-content>
     </md-card>
-
 </template>
 
 <script>

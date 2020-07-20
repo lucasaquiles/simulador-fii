@@ -62,23 +62,18 @@ export default {
 </script>
 
 <style>
-
   .summary-card {
     width: 100%;
     margin: 5px 0;
     background-color: #4F86C6;
     color: #fff
   }
- 
-
   .summary-card .md-caption-subhead {
     opacity: 1;
     color: #fff;
   }
-
   .summary-card .md-caption {
     opacity: .54;
     color: #fff;
   }
-
 </style>

@@ -9,7 +9,7 @@
     "start-dev": "npm run dev",
     "start": "npm run build",
     "heroku-prebuild": "npm --production=false install",
-    "lint": "eslint --ext .js,.vue src",
+    "lint": "eslint --ext .js,.vue",
     "build": "NODE_ENV=production node build/build.js"
   },
   "dependencies": {

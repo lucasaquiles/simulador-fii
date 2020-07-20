@@ -7,7 +7,8 @@ const store = {
     amount: 1,
     yeldValue: 0.0,
     totalYeld: 0,
-    totalInvestiment: 0.0
+    totalInvestiment: 0.0,
+    sumary: {}
   },
   simulationResults: []
 }
