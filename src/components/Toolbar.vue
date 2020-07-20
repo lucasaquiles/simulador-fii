@@ -3,7 +3,9 @@
 		
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<!-- <button><md-icon class="fa fa-refresh"></md-icon></button> -->
-		<button v-if="storageEnabled" title="Limpar do browser" v-on:click="clearStorage()"><md-icon class="fa fa-trash"></md-icon></button>
+		<button v-if="storageEnabled" title="Limpar do browser" v-on:click="clearStorage()">
+			<md-icon class="fa fa-trash"></md-icon>
+		</button>
 	
 	</div>
 </template>

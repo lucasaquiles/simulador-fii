@@ -16,8 +16,15 @@
                   <span class="md-caption">{{item.totalInvestiment.toCurrencyFormat()}} ({{item.amount}} cota{{item.amount>1?'s':''}})</span>
                 </div>
                 <div>
-                  <span class="md-caption">Mediana de dividendos dos últimos 12 meses: <strong>{{item.sumary.median}} </strong></span>
+                  <span v-if="item.sumary != null" class="md-caption">Mediana de dividendos dos últimos 12 meses: <strong>{{item.sumary.median}} </strong></span>
+                  
+                  <!-- <div style="float:right">
+                    <a title="Limpar do browser" href="#" v-on:click="toggle()">
+                      <md-icon class="fa fa-eye"></md-icon>
+                    </a>
+                  </div> -->
                 </div>
+                <div class="table-wrapper" id="">
                 <table>
                     <tr>
                       <th>Data de referência</th>
@@ -34,6 +41,7 @@
                         <td>{{sumaryItem.rendimento.toCurrencyFormat()}}</td>
                     </tr>
                 </table>
+                </div>
               </div>
             </div>
           </md-card-content>
