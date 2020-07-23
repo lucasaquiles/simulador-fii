@@ -1,7 +1,7 @@
 
 const store = {
   simulationData: {
-    fiiCodeSelected: ' ',
+    fiiCodeSelected: '',
     price: 0.0,
     period: 1,
     amount: 1,
