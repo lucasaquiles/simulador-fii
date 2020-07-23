@@ -8,7 +8,8 @@ const store = {
     yeldValue: 0.0,
     totalYeld: 0,
     totalInvestiment: 0.0,
-    sumary: {}
+    sumary: {},
+    createdAt:null
   },
   simulationResults: []
 }
