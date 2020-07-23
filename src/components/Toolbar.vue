@@ -1,16 +1,17 @@
 <template>
 	<div v-if="simulationResults.length > 0" class="md-layout-item md-body-2" style="padding-top: 10px; padding-bottom: 10px; text-align: right;">  
-		
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<!-- <button><md-icon class="fa fa-refresh"></md-icon></button> -->
-		<button v-if="storageEnabled" title="Limpar do browser" v-on:click="clearStorage()">
+		<button v-if="storageEnabled" title="Limpar do browser" v-on:click="clearSimulation()">
 			<md-icon class="fa fa-trash"></md-icon>
 		</button>
-	
 	</div>
 </template>
 
 <script>
+
+import ToolbarActions from '../actions/ToolbarActions'
+const toolbarAction = new ToolbarActions()
+
 export default {
 	name: 'Toolbar',
 	props: ['simulationResults'],
@@ -20,14 +21,14 @@ export default {
 		}
 	},
 	beforeMount () {
-		const key = document.location.href
-		this.storageEnabled = localStorage[key]?true:false
+		this.storageEnabled = toolbarAction.storageWasCreated()
 	},
 	methods: {
-		clearStorage() {
-			const key = document.location.href
-			localStorage[key] = JSON.stringify([])
-			document.location.reload()
+		clearSimulation() {
+			toolbarAction.clearSimulation()
+		},
+		saveSimulation() {
+
 		}
   }
 }
