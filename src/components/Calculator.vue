@@ -35,6 +35,9 @@
 </template>
 <script>
 import crawler from '../services/Crawler'
+import CalculatorAction from '../actions/CalculatorAction'
+const calculatorAction = new CalculatorAction()
+
 export default {
   name: 'Calculator',
   props: [
@@ -76,10 +79,17 @@ export default {
       }
     },
     persist (data) {
-      const key = document.location.href
-      var currentDataInStore = JSON.parse(localStorage[key])
-      currentDataInStore.push(data)
-      localStorage[key] = JSON.stringify(currentDataInStore)
+      calculatorAction.save(data)
+    },
+    createDateSimulation() {
+      const date = new Date()
+      const dateFormat = new Intl.DateTimeFormat('pt', { 
+        year: 'numeric', 
+        month: '2-digit', 
+        day: '2-digit'
+      })
+
+      return dateFormat.format(date)
     },
     async getFiis () {
       if (this.simulation.fiiCodeSelected.length >= 5) {
@@ -92,6 +102,7 @@ export default {
         this.simulation.totalYeld = this.simulation.totalYeld * this.simulation.yeldValue
         this.simulation.totalYeld = this.simulation.totalYeld * this.simulation.amount
         this.simulation.totalInvestiment = this.simulation.price * this.simulation.amount
+        this.simulation.createdAt = this.createDateSimulation()
         this.edited = true
         this.loading = false
         console.log(response.data)

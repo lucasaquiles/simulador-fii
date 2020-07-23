@@ -22,6 +22,9 @@
 import Calculator from './Calculator.vue'
 import SimulationResults from './SimulationResults.vue'
 import store from '../model/store'
+import SessionStorageManager from '../actions/SessionStorageManager'
+
+const sessionStorageManager = new SessionStorageManager(document.location.href)
 
 export default {
   name: 'Simulator',
@@ -31,17 +34,8 @@ export default {
   data () {
     return store
   },
-  beforeMount () {
-    const href = document.location.href
-    if (!localStorage[href]) {
-      localStorage[href] = JSON.stringify([])
-    }
-  },
   mounted () {
-    const href = document.location.href
-    if (localStorage[href]) {
-      this.store.simulationResults = JSON.parse(localStorage[href])
-    }
+    this.store.simulationResults = sessionStorageManager.load()
   }
 }
 </script>

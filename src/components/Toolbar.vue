@@ -26,9 +26,6 @@ export default {
 	methods: {
 		clearSimulation() {
 			toolbarAction.clearSimulation()
-		},
-		saveSimulation() {
-
 		}
   }
 }
