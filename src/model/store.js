@@ -2,6 +2,7 @@
 const store = {
   simulationData: {
     fiiCodeSelected: '',
+    segment: '',
     price: 0.0,
     period: 1,
     amount: 1,

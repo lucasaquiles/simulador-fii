@@ -18,11 +18,11 @@
                 <div>
                   <span v-if="item.sumary != null" class="md-caption">Mediana de dividendos dos últimos 12 meses: <strong>{{item.sumary.median}} </strong></span>
                   
-                  <!-- <div style="float:right">
-                    <a title="Limpar do browser" href="#" v-on:click="toggle()">
+                  <div style="float:right">
+                    <a title="Limpar do browser" href="#" v-on:click.prevent="toggle($event, item)">
                       <md-icon class="fa fa-eye"></md-icon>
                     </a>
-                  </div> -->
+                  </div>
                 </div>
                 <div class="table-wrapper" id="">
                 <table>
@@ -69,11 +69,28 @@ export default {
   props: ['simulationResults'],
   data () {
     // return this.simulationResults
+  },
+  methods: {
+    toggle(event) {
+      // console.log(event);
+      
+      if(event) {
+        console.log(event.target.classList.toggle("fa-eye-slash"))
+        event.target.parentElement.parentElement.parentElement.nextElementSibling.classList.toggle("slideDown")
+      }
+
+    }
   }
 }
 </script>
 
 <style lang="css" scoped>
+  .slideDown{
+    transition: all .5s ease-in-out;
+  height: 0;
+
+    display: none;
+  }
   .simulation-list .md-card{
     margin:10px 0
   }

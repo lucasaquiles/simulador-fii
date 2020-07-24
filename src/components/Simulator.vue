@@ -1,4 +1,5 @@
 <template>
+  <div>
     <md-card>
         <md-card-header>
             <div class="md-title">
@@ -16,11 +17,15 @@
             </div>
         </md-card-content>
     </md-card>
+
+    <Footer />
+  </div>
 </template>
 
 <script>
 import Calculator from './Calculator.vue'
 import SimulationResults from './SimulationResults.vue'
+import Footer from './Footer.vue'
 import store from '../model/store'
 import SessionStorageManager from '../actions/SessionStorageManager'
 
@@ -29,7 +34,7 @@ const sessionStorageManager = new SessionStorageManager(document.location.href)
 export default {
   name: 'Simulator',
   components: {
-    Calculator, SimulationResults
+    Calculator, SimulationResults, Footer
   },
   data () {
     return store

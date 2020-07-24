@@ -98,6 +98,7 @@ export default {
         this.simulation.sumary = response.data.sumary
         this.simulation.yeldValue = response.data.lastDividend
         this.simulation.price = response.data.value
+        this.simulation.segment = response.data.fiiType
         this.simulation.totalYeld = 1
         this.simulation.totalYeld = this.simulation.totalYeld * this.simulation.yeldValue
         this.simulation.totalYeld = this.simulation.totalYeld * this.simulation.amount
