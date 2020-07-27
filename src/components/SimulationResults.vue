@@ -19,28 +19,28 @@
                   <span v-if="item.sumary != null" class="md-caption">Mediana de dividendos dos últimos 12 meses: <strong>{{item.sumary.median}} </strong></span>
                   
                   <div style="float:right">
-                    <a title="Limpar do browser" href="#" v-on:click.prevent="toggle($event, item)">
+                    <a title="Exibir histórico de dividendos" href="#" v-on:click.prevent="toggle($event, item)">
                       <md-icon class="fa fa-eye"></md-icon>
                     </a>
                   </div>
                 </div>
                 <div class="table-wrapper" id="">
-                <table>
-                    <tr>
-                      <th>Data de referência</th>
-                      <th>Data de pagamento</th>
-                      <th>Cotação</th>
-                      <th>Yeld</th>
-                      <th>Dividendo</th>
-                    </tr>
-                    <tr v-for="(sumaryItem, index) in item.sumary.dividendLast12Months">
-                        <td>{{sumaryItem.base}}</td>
-                        <td>{{sumaryItem.paymentDate}}</td>
-                        <td>{{sumaryItem.stockValue.toCurrencyFormat()}}</td>
-                        <td>{{sumaryItem.yeldPercentage}}%</td>
-                        <td>{{sumaryItem.rendimento.toCurrencyFormat()}}</td>
-                    </tr>
-                </table>
+                  <table>
+                      <tr>
+                        <th>Data de referência</th>
+                        <th>Data de pagamento</th>
+                        <th>Cotação</th>
+                        <th>Yeld</th>
+                        <th>Dividendo</th>
+                      </tr>
+                      <tr v-for="(sumaryItem, index) in item.sumary.dividendLast12Months">
+                          <td>{{sumaryItem.base}}</td>
+                          <td>{{sumaryItem.paymentDate}}</td>
+                          <td>{{sumaryItem.stockValue.toCurrencyFormat()}}</td>
+                          <td>{{sumaryItem.yeldPercentage}}%</td>
+                          <td>{{sumaryItem.rendimento.toCurrencyFormat()}}</td>
+                      </tr>
+                  </table>
                 </div>
               </div>
             </div>
@@ -68,17 +68,14 @@ export default {
   },
   props: ['simulationResults'],
   data () {
-    // return this.simulationResults
+    
   },
   methods: {
     toggle(event) {
-      // console.log(event);
-      
       if(event) {
         console.log(event.target.classList.toggle("fa-eye-slash"))
         event.target.parentElement.parentElement.parentElement.nextElementSibling.classList.toggle("slideDown")
       }
-
     }
   }
 }
@@ -87,7 +84,7 @@ export default {
 <style lang="css" scoped>
   .slideDown{
     transition: all .5s ease-in-out;
-  height: 0;
+    height: 0;
 
     display: none;
   }
