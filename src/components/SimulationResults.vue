@@ -3,49 +3,33 @@
     <Summary :simulationResults="simulationResults" />
     <Toolbar :simulationResults="simulationResults" />
     <div class="simulation-list">
-      <div  v-for="item in simulationResults" :key="item.fiiCodeSelected">
+      <div>
         <md-card class="md-dark-ligth">
-          <md-card-content>
-            <div class="content-list">
-              <div class="stock-info">
-                <Badge :simulationItem="item" />
-              </div>
-              <div class="wrap-content">
-                <div class="md-title">{{item.totalYeld.toCurrencyFormat()}}* em dividendos no período de {{item.period}} {{item.period > 1? 'meses': 'mês'}} </div>
-                <div class="md-subheading">
-                  <span class="md-caption">{{item.totalInvestiment.toCurrencyFormat()}} ({{item.amount}} cota{{item.amount>1?'s':''}})</span>
-                </div>
-                <div>
-                  <span v-if="item.sumary != null" class="md-caption">Mediana de dividendos dos últimos 12 meses: <strong>{{item.sumary.median}} </strong></span>
-                  
-                  <div style="float:right">
-                    <a title="Exibir histórico de dividendos" href="#" v-on:click.prevent="toggle($event, item)">
-                      <md-icon class="fa fa-eye"></md-icon>
-                    </a>
-                  </div>
-                </div>
-                <div class="table-wrapper" id="">
-                  <table>
-                      <tr>
-                        <th>Data de referência</th>
-                        <th>Data de pagamento</th>
-                        <th>Cotação</th>
-                        <th>Yeld</th>
-                        <th>Dividendo</th>
-                      </tr>
-                      <tr v-for="(sumaryItem, index) in item.sumary.dividendLast12Months">
-                          <td>{{sumaryItem.base}}</td>
-                          <td>{{sumaryItem.paymentDate}}</td>
-                          <td>{{sumaryItem.stockValue.toCurrencyFormat()}}</td>
-                          <td>{{sumaryItem.yeldPercentage}}%</td>
-                          <td>{{sumaryItem.rendimento.toCurrencyFormat()}}</td>
-                      </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </md-card-content>
-        </md-card>
+          <table v-if="simulationResults && simulationResults.length > 0">
+            <tr>
+              <th>FII</th>
+              <th>Segmento</th>
+              <th>Cotação</th>
+              <th>Quantidade</th>
+              <th>Último dividendo pago</th>
+              <th>Dividendos (12 meses)</th>
+              <th>Total dividendos</th>
+              <th>Dividendos período simulado</th>
+              <th>Total acumulado</th>
+            </tr>
+            <tr v-for="(item, index) in simulationResults" :key="index">
+              <td>{{item.fiiCodeSelected.toUpperCase()}}</td>
+              <td>{{item.segment}}</td>
+              <td>{{item.price.toCurrencyFormat()}}</td>
+              <td>{{item.amount}}</td>
+              <td>{{item.yeldValue.toCurrencyFormat()}}</td>
+              <td>{{parseFloat(item.sumary.median).toCurrencyFormat()}}</td>
+              <td>{{item.totalYeld.toCurrencyFormat()}}</td>
+              <td>{{(item.sumary.median * item.period * item.amount).toCurrencyFormat()}} </td>
+              <td>{{item.totalInvestiment + item.totalYeld}} </td>
+            </tr>
+          </table>
+        </md-card> 
       </div>
     </div>
     <div v-if="simulationResults.length > 0">
@@ -67,12 +51,9 @@ export default {
     Summary, Badge, Toolbar
   },
   props: ['simulationResults'],
-  data () {
-    
-  },
   methods: {
     toggle(event) {
-      if(event) {
+      if(event) { 
         console.log(event.target.classList.toggle("fa-eye-slash"))
         event.target.parentElement.parentElement.parentElement.nextElementSibling.classList.toggle("slideDown")
       }
@@ -112,21 +93,23 @@ export default {
     padding-left: 20px;
     text-align: left;
   }
-  .content-list .wrap-content table{
-    width:100%;
+ 
+  .simulation-list table{
+    width: 100%;
     margin-top:10px;
     border-collapse: collapse;
   }
-  .content-list .wrap-content table tr{
+  
+  .simulation-list table tr{
     border-bottom:solid 1px #e7e7e7;
     cursor: pointer;
   }
-  .content-list .wrap-content table tr:hover{
+  .simulation-list table tr:hover{
     background-color: #efefef;
     color:#555
   }
-  .content-list .wrap-content table tr td, .content-list .wrap-content table tr th{
-    padding:5px
+  .simulation-list table tr td, .simulation-list table tr th{
+    padding:5px;
   }
   .tool{
     position: absolute;

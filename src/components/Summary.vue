@@ -38,9 +38,6 @@ import SummaryService from '../services/SummaryService'
 export default {
   name: 'Summary',
   props: ['simulationResults'],
-  data () {
-    return this.simulationResults
-  },
   methods: {
     calculaTotalDividendosMes () {
       return SummaryService.calculaTotalDividendosMes(this.simulationResults)
