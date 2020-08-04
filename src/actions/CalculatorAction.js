@@ -8,7 +8,6 @@ class CalculatorAction {
     }
 
     save(calculatorData) {
-        console.log("data", calculatorData);
         this.sessionStorageManager.saveOrUpdate(calculatorData)
     }
 }

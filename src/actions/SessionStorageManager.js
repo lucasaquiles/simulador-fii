@@ -13,7 +13,6 @@ class SessionStorageManager {
 
     load() {
         if (localStorage[this.key]) {
-            console.log("achou")
             return JSON.parse(localStorage[this.key])
         }
     }
@@ -27,9 +26,18 @@ class SessionStorageManager {
     }
 
     saveOrUpdate(data) {
-      var currentDataInStore = this.toObject(localStorage[this.key])
-      currentDataInStore.push(data)
+      const currentDataInStore = this.toObject(localStorage[this.key])
+      this.findAndUpdate(currentDataInStore, data)
       localStorage[this.key] = this.toJSON(currentDataInStore)
+    }
+
+    findAndUpdate(array, data) {
+        const index = array.findIndex((filter) => filter.fiiCodeSelected == data.fiiCodeSelected)
+        if(index >= 0) {
+            array[index] = data
+        }else {
+            array.push(data)
+        }
     }
 
     toObject(data) {
