@@ -11,30 +11,34 @@
               <th>Segmento</th>
               <th>Cotação</th>
               <th>Quantidade</th>
+              <th>Período</th>
               <th>Último dividendo pago</th>
-              <th>Dividendos (12 meses)</th>
-              <th>Total dividendos</th>
-              <th>Dividendos período simulado</th>
-              <th>Total acumulado</th>
+              <th>Total dividendos <br />no mês</th>
+              <th>Dividendos <br /> (mediana 12 meses)</th>
+              <th>Total Dividendos <br />no período simulado</th>
+              <th>Total<br /> acumulado</th>
             </tr>
             <tr v-for="(item, index) in simulationResults" :key="index">
               <td>{{item.fiiCodeSelected.toUpperCase()}}</td>
               <td>{{item.segment}}</td>
               <td>{{item.price.toCurrencyFormat()}}</td>
               <td>{{item.amount}}</td>
+              <td>{{item.period}} {{item.period > 1?'meses':'mês'}}</td>
               <td>{{item.yeldValue.toCurrencyFormat()}}</td>
+              <td>{{(item.yeldValue * item.amount).toCurrencyFormat()}}</td>
               <td>{{parseFloat(item.sumary.median).toCurrencyFormat()}}</td>
-              <td>{{item.totalYeld.toCurrencyFormat()}}</td>
               <td>{{(item.sumary.median * item.period * item.amount).toCurrencyFormat()}} </td>
-              <td>{{(item.totalInvestiment + item.totalYeld).toCurrencyFormat()}} </td>
+              <td>{{((item.price * item.amount) + (item.yeldValue * item.amount)).toCurrencyFormat()}} </td>
             </tr>
           </table>
         </md-card> 
       </div>
     </div>
     <div v-if="simulationResults.length > 0">
-     <p  class="md-caption">* as informações consideram apenas o último rendimento
-      pago de cada FII</p>
+      <span  class="md-caption">* a coluna <strong>Dividendos período simulado</strong> considera a mediana de dividendos pagos nos ultimos 12 meses</span> 
+      <br />
+      <span  class="md-caption">* as informações consideram apenas o último rendimento
+      pago de cada FII</span>
     </div>
   </div>
 </template>

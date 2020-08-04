@@ -4,16 +4,16 @@
       <div class="md-card summary-card">
         <div class="tool"></div>
         <div class="md-card-content">
-          <div class="md-subhead">Dividendos</div>
+          <div class="md-subhead">Dividendos nesse mês</div>
           <div class="md-title">{{calculaTotalDividendosMes().toCurrencyFormat()}}</div>
-          <span class="md-caption">({{calculaPorcentagemDividendosMes()}}% a.m)</span>
+          <span class="md-caption">({{calculaPorcentagemDividendosMes()}}% no mês)</span>
         </div>
       </div>
     </div>
     <div class="md-layout-item">
       <div class="md-card summary-card">
         <div class="md-card-content">
-          <div class="md-subhead">Dividendos</div>
+          <div class="md-subhead">Dividendos no ano</div>
           <div class="md-title">{{calculaTotalNoPeriodoInformado().toCurrencyFormat()}}</div>
           <span class="md-caption">({{calculaPorcentagemPeriodo()}}% a.a)</span>
         </div>
