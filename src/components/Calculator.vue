@@ -81,10 +81,10 @@ export default {
       this.simulation.fiiCodeSelected = ''
       this.simulation.price = 0.0
       this.simulation.yeldValue = 0.0
-      this.simulation.period = 0
+      this.simulation.period = 1
       this.simulation.totalYeld = 0.0
       this.simulation.totalInvestiment = 0.0
-      this.simulation.amount = 0,
+      this.simulation.amount = 1,
       this.sumary = {}
     },
     add () {
