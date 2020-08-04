@@ -26,7 +26,7 @@
               <td>{{parseFloat(item.sumary.median).toCurrencyFormat()}}</td>
               <td>{{item.totalYeld.toCurrencyFormat()}}</td>
               <td>{{(item.sumary.median * item.period * item.amount).toCurrencyFormat()}} </td>
-              <td>{{item.totalInvestiment + item.totalYeld}} </td>
+              <td>{{(item.totalInvestiment + item.totalYeld).toCurrencyFormat()}} </td>
             </tr>
           </table>
         </md-card> 
