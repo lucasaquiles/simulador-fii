@@ -15,7 +15,7 @@
     <div class="md-layout-item md-layout md-gutter">
       <div class="md-layout-item">
         <md-field>
-          <label>Código da FI</label>
+          <label>Código da FII</label>
           <md-input v-model="simulation.fiiCodeSelected" v-on:blur="getFiis" v-on:keyup="validationKeyPress"></md-input>
         </md-field>
       </div>
