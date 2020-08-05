@@ -4,7 +4,7 @@
       <div class="md-card summary-card">
         <div class="tool"></div>
         <div class="md-card-content">
-          <div class="md-subhead">Dividendos nesse mês</div>
+          <div class="md-subhead">Dividendos no mês</div>
           <div class="md-title">{{calculaTotalDividendosMes().toCurrencyFormat()}}</div>
           <span class="md-caption">({{calculaPorcentagemDividendosMes()}}% no mês)</span>
         </div>

@@ -5,12 +5,62 @@
     <div class="simulation-list">
       <div>
         <md-card class="md-dark-ligth">
+          
+          <div v-if="simulationResults && simulationResults.length > 0" class="mobile-table">
+
+                <table v-for="(item, index) in simulationResults" :key="index" class="mobile-table">                  
+                  <tr>
+                    <td>
+                      <strong>{{item.fiiCodeSelected.toUpperCase()}}</strong> 
+                    </td>
+                    <td>
+                      {{item.segment}}
+                    </td>
+                  </tr>  
+                  <tr>
+                    <td>Cotação</td>
+                    <td>{{item.price.toCurrencyFormat()}}</td>
+                  </tr>
+
+                  <tr>
+                    <td>Cotas</td>
+                    <td>{{item.amount}}</td>
+                  </tr> 
+                  
+                  <tr>
+                    <td>Período</td>
+                    <td>{{item.period}} {{item.period > 1?'meses':'mês'}}</td>
+                  </tr>
+
+                  <tr>
+                    <td>Último dividendo pago</td>
+                    <td>{{item.yeldValue.toCurrencyFormat()}}</td>
+                  </tr>
+                  <tr>
+                    <td>Total dividendos <br />no mês</td>
+                    <td>{{(item.yeldValue * item.amount).toCurrencyFormat()}}</td>
+                  </tr>
+                  <tr>
+                    <td>Dividendos <br />no mês</td>
+                    <td>{{parseFloat(item.sumary.median).toCurrencyFormat()}}</td>
+                  </tr>
+                  <tr>
+                    <td>Total Dividendos <br />no período simulado</td>
+                    <td>{{(item.sumary.median * item.period * item.amount).toCurrencyFormat()}}</td>
+                  </tr>
+                  <tr>
+                    <td>Total<br /> acumulado</td>
+                    <td>{{((item.price * item.amount) + (item.yeldValue * item.amount)).toCurrencyFormat()}}</td>
+                  </tr>
+            </table>
+          </div>
+
           <table v-if="simulationResults && simulationResults.length > 0">
             <tr>
-              <th>FII</th>
+              <th>Ativo</th>
               <th>Segmento</th>
               <th>Cotação</th>
-              <th>Quantidade</th>
+              <th>Cotas</th>
               <th>Período</th>
               <th>Último dividendo pago</th>
               <th>Total dividendos <br />no mês</th>
@@ -67,6 +117,43 @@ export default {
 </script>
 
 <style lang="css" scoped>
+  @media only screen and (max-width: 600px) {
+    .simulation-list table {
+      display: none;
+    }
+    
+    .simulation-list .mobile-table td{
+      padding: 10px 5px;
+      font-size: small;
+    }
+    
+    .simulation-list .mobile-table tr >  td:first-child{
+      text-align: left;
+      padding-left: 15px;
+    }
+    .simulation-list .mobile-table tr:first-child td{
+      background-color: #e7e7e7;
+    }
+
+    .simulation-list .mobile-table{
+        display: block;
+        width: 100%;
+        
+    }
+    .simulation-list .mobile-table table{
+      display: table;
+      width: 100%;
+      padding: 0;
+      margin-bottom: 20px;
+      border-bottom:solid 2px e7e7e7;
+      border-top: solid 1px #e7e7e7
+    }
+    
+  }
+
+  .mobile-table {
+    display: none;
+  }
   .slideDown{
     transition: all .5s ease-in-out;
     height: 0;
