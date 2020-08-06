@@ -9,13 +9,14 @@
     "start-dev": "npm run dev",
     "start": "npm run build",
     "heroku-prebuild": "npm --production=false install",
-    "lint": "eslint --ext .js,.vue src",
+    "lint": "eslint --ext .js,.vue",
     "build": "NODE_ENV=production node build/build.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "vue": "^2.5.2",
+    "vue-analytics": "^5.22.1",
     "vue-material": "^1.0.0-beta-14",
     "vue-router": "^3.0.1"
   },

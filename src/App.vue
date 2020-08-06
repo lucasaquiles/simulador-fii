@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    
     <router-view/>
   </div>
 </template>
@@ -12,6 +11,9 @@ export default {
 </script>
 
 <style>
+  body{
+    background-color: #4F86C6
+  }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
