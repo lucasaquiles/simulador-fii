@@ -16,13 +16,14 @@
       <div class="md-layout-item">
         <md-field>
           <label>Código da FII</label>
-          <md-input v-model="simulation.fiiCodeSelected" v-on:blur="getFiis" v-on:keyup="validationKeyPress"></md-input>
+          
+          <md-input v-model="simulation.fiiCodeSelected" v-on:blur="getFiis" ></md-input>
         </md-field>
       </div>
       <div class="md-layout-item">
         <md-field>
           <label>Tempo de aplicação (meses)</label>
-          <md-input v-model="simulation.period" v-on:keyup="update"></md-input>
+          <md-input v-model="simulation.period" v-on:keyup="update" ></md-input>
         </md-field>
       </div>
       <div class="md-layout-item">
@@ -39,7 +40,9 @@
 <script>
 import crawler from '../services/Crawler'
 import CalculatorAction from '../actions/CalculatorAction'
+import CalculatorActionValidator from '../actions/CalculatorActionValidator'
 const calculatorAction = new CalculatorAction()
+const calculatorActionValidator = new CalculatorActionValidator()
 
 export default {
   name: 'Calculator',
@@ -59,7 +62,6 @@ export default {
   methods: {
     validationKeyPress() {
       this.edited = false
-      
       const validationResult = this.validate(this.simulation)
       this.hasValidationErrors = validationResult.hasErrors
       this.messageValidations = validationResult.messages
@@ -85,7 +87,7 @@ export default {
       this.simulation.totalYeld = 0.0
       this.simulation.totalInvestiment = 0.0
       this.simulation.amount = 1,
-      this.sumary = {}
+      this.simulation.sumary = {}
     },
     add () {
       console.log('add()', this.edited)
@@ -122,60 +124,11 @@ export default {
       })
       array[index] = item
     },
-    persist (data) {
-      calculatorAction.save(data)
-    },
-    createDateSimulation() {
-      const date = new Date()
-      const dateFormat = new Intl.DateTimeFormat('pt', { 
-        year: 'numeric', 
-        month: '2-digit', 
-        day: '2-digit'
-      })
-      return dateFormat.format(date)
+    persist (simulation) {
+      calculatorAction.save(simulation)
     },
     validate(simulation) {
-        const FII_SELECTED = {
-          validate(data){
-            return data.fiiCodeSelected.length >= 5
-          },
-          message: "você precisa informar uma FII"
-        }
-        const AMOUNT = {
-          validate(data) {
-              return data.amount > 0
-          },
-          message: "você precisa informar a quantidade de ações"
-        }
-
-        const VALID_PERIOD = {
-          validate(data) {
-              return data.period > 0
-          },
-          message: "você precisa informar um período válido"
-        }
-
-        const validations = Object.seal({FII_SELECTED,AMOUNT,VALID_PERIOD})
-
-        const messageValiations =  Object.values(validations).filter((validation) => !validation.validate(simulation))
-        .map((validation) => validation.message)
-        .flat()
-
-        return Object.seal({
-          hasErrors: (messageValiations.length > 0),
-          messages: messageValiations,
-        })
-    },
-    parseResponse(responseData) {
-      this.simulation.sumary = responseData.sumary
-      this.simulation.yeldValue = responseData.lastDividend
-      this.simulation.price = responseData.value
-      this.simulation.segment = responseData.fiiType
-      this.simulation.totalYeld = 1
-      this.simulation.totalYeld = this.simulation.totalYeld * this.simulation.yeldValue
-      this.simulation.totalYeld = this.simulation.totalYeld * this.simulation.amount
-      this.simulation.totalInvestiment = this.simulation.price * this.simulation.amount
-      this.simulation.createdAt = this.createDateSimulation()
+        return calculatorActionValidator.validate(simulation)
     },
     async getFiis () {
 
@@ -190,8 +143,7 @@ export default {
         this.loading = true
         const response = await crawler.findStock(this.simulation.fiiCodeSelected.trim())
         if(response.status == 200){
-          
-          this.parseResponse(response.data)
+          this.simulation = calculatorAction.toSimulationData(this.simulation, response.data)
           this.edited = true
         }else{
           this.errorMessage = response.status
