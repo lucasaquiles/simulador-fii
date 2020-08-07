@@ -1,39 +1,55 @@
 class SummaryService {
-	static calculaTotalDividendosMes (simulationResults) {
+	calculaTotalDividendosMes (simulationResults) {
 		return simulationResults.reduce((total, item) => {
 			return (total + (item.yeldValue * item.amount))
 		}, 0)
 	}
 
-	static calculaSimulacaoDividendosAoMes (simulationResults) {
+	calculaSimulacaoDividendosAoMes (simulationResults) {
 		return simulationResults.reduce((total, item) => {
 			return (total + (item.sumary.median * item.amount * item.period))
 		}, 0)
 	}
 
-	static calculaPorcentagemPeriodoSimulacaoDividendos (simulationResults) {
+	calculaPorcentagemPeriodoSimulacaoDividendos (simulationResults) {
 		const percentage = (this.calculaTotalNoPeriodoInformado(simulationResults) / this.getTotalInvestimento(simulationResults)) * 100
 		return percentage.toFixed(2)
 	}
 
-	static calculaTotalNoPeriodoInformado (simulationResults) {
+	calculaTotalNoPeriodoInformado (simulationResults) {
 		return simulationResults.reduce((total, item) => {
 			return total + ((item.sumary.median * item.amount) * 12)
 		}, 0)
 	}
-	static calculaPorcentagemPeriodo (simulationResults) {
+	calculaPorcentagemPeriodo (simulationResults) {
 		const percentage = (this.calculaTotalNoPeriodoInformado(simulationResults) / this.getTotalInvestimento(simulationResults)) * 100
 		return percentage.toFixed(2)
 	}
-	static getTotalInvestimento (simulationResults) {
+	getTotalInvestimento (simulationResults) {
 		return simulationResults.reduce((total, item) => {
 			return (total + (item.price * item.amount)) + this.calculaTotalDividendosMes(simulationResults)
 		}, 0)
 	}
-	static calculaPorcentagemDividendosMes (simulationResults) {
+	calculaPorcentagemDividendosMes (simulationResults) {
 		const percentage = (this.calculaTotalDividendosMes(simulationResults) / this.getTotalInvestimento(simulationResults)) * 100
 		return percentage.toFixed(2)
 	}
+
+	calculateTotalYeld(item) {
+		return item.yeldValue * item.amount
+	}
+	
+	calculateTotalYeldAtPeriod(item) {
+		return item.sumary.median * item.period * item.amount
+	}
+	
+	calculatePercentageRendiments(item) {
+		return ( (item.yeldValue * item.amount) / (item.price * item.amount) * 100 ).toFixed(2)
+	}
+	
+	calculateTotalInvestiment(item) {
+		return (item.price * item.amount) + (item.yeldValue * item.amount)
+	}
 }
 
-export default SummaryService
+export default new SummaryService()

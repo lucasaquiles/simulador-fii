@@ -5,7 +5,7 @@
     <div class="simulation-list">
       <div>
         <md-card class="md-dark-ligth">
-          
+
           <div v-if="simulationResults && simulationResults.length > 0" class="mobile-table">
 
                 <table v-for="(item, index) in simulationResults" :key="index" class="mobile-table">                  
@@ -66,6 +66,7 @@
               <th>Total dividendos <br />no mês</th>
               <th>Dividendos <br /> (mediana 12 meses)</th>
               <th>Total Dividendos <br />no período simulado</th>
+              <th>% Rendimento</th>
               <th>Total<br /> acumulado</th>
             </tr>
             <tr v-for="(item, index) in simulationResults" :key="index">
@@ -75,10 +76,11 @@
               <td>{{item.amount}}</td>
               <td>{{item.period}} {{item.period > 1?'meses':'mês'}}</td>
               <td>{{item.yeldValue.toCurrencyFormat()}}</td>
-              <td>{{(item.yeldValue * item.amount).toCurrencyFormat()}}</td>
+              <td>{{calculateTotalYeld(item).toCurrencyFormat()}}</td>
               <td>{{parseFloat(item.sumary.median).toCurrencyFormat()}}</td>
-              <td>{{(item.sumary.median * item.period * item.amount).toCurrencyFormat()}} </td>
-              <td>{{((item.price * item.amount) + (item.yeldValue * item.amount)).toCurrencyFormat()}} </td>
+              <td>{{calculateTotalYeldAtPeriod(item).toCurrencyFormat()}} </td>
+              <td>{{calculatePercentageRendiments(item)}}% </td>
+              <td>{{calculateTotalInvestiment(item).toCurrencyFormat()}} </td>
             </tr>
           </table>
         </md-card> 
@@ -99,6 +101,8 @@ import Summary from './Summary.vue'
 import Badge from './Badge.vue'
 import Toolbar from './Toolbar.vue'
 
+import SummaryService from '../services/SummaryService'
+
 export default {
   name: 'SimulationResults',
   components: {
@@ -106,6 +110,18 @@ export default {
   },
   props: ['simulationResults'],
   methods: {
+    calculateTotalYeld(item) {
+      return SummaryService.calculateTotalYeld(item)
+    },
+    calculateTotalYeldAtPeriod(item) {
+      return SummaryService.calculateTotalYeldAtPeriod(item)
+    },
+    calculatePercentageRendiments(item) {
+      return SummaryService.calculatePercentageRendiments(item)
+    },
+    calculateTotalInvestiment(item) {
+      return SummaryService.calculateTotalInvestiment(item)
+    },
     toggle(event) {
       if(event) { 
         console.log(event.target.classList.toggle("fa-eye-slash"))
