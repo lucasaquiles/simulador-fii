@@ -29,7 +29,7 @@
                   
                   <tr>
                     <td>Período</td>
-                    <td>{{item.period}} {{item.period > 1?'meses':'mês'}}</td>
+                    <td>{{item.period}} {{formatMonth(item)}}</td>
                   </tr>
 
                   <tr>
@@ -38,19 +38,19 @@
                   </tr>
                   <tr>
                     <td>Total dividendos <br />no mês</td>
-                    <td>{{(item.yeldValue * item.amount).toCurrencyFormat()}}</td>
+                    <td>{{calculateTotalYeld(item).toCurrencyFormat()}}</td>
                   </tr>
                   <tr>
                     <td>Dividendos <br />no mês</td>
-                    <td>{{parseFloat(item.sumary.median).toCurrencyFormat()}}</td>
+                    <td>{{calculateTotalYeldAtPeriod(item).toCurrencyFormat()}} </td>
                   </tr>
                   <tr>
                     <td>Total Dividendos <br />no período simulado</td>
-                    <td>{{(item.sumary.median * item.period * item.amount).toCurrencyFormat()}}</td>
+                    <td>{{calculatePercentageRendiments(item)}}% </td>
                   </tr>
                   <tr>
                     <td>Total<br /> acumulado</td>
-                    <td>{{((item.price * item.amount) + (item.yeldValue * item.amount)).toCurrencyFormat()}}</td>
+                    <td>{{calculateTotalInvestiment(item).toCurrencyFormat()}}</td>
                   </tr>
             </table>
           </div>
@@ -74,7 +74,7 @@
               <td>{{item.segment}}</td>
               <td>{{item.price.toCurrencyFormat()}}</td>
               <td>{{item.amount}}</td>
-              <td>{{item.period}} {{item.period > 1?'meses':'mês'}}</td>
+              <td>{{item.period}} {{formatMonth(item)}}</td>
               <td>{{item.yeldValue.toCurrencyFormat()}}</td>
               <td>{{calculateTotalYeld(item).toCurrencyFormat()}}</td>
               <td>{{parseFloat(item.sumary.median).toCurrencyFormat()}}</td>
@@ -110,6 +110,9 @@ export default {
   },
   props: ['simulationResults'],
   methods: {
+    formatMonth(item) {
+      return item.period > 1 ? 'meses' : 'mês'
+    },
     calculateTotalYeld(item) {
       return SummaryService.calculateTotalYeld(item)
     },
