@@ -66,7 +66,7 @@
               <th>Total dividendos <br />no mês</th>
               <th>Dividendos <br /> (mediana 12 meses)</th>
               <th>Total Dividendos <br />no período simulado</th>
-              <th>% Rendimento</th>
+              <th>Rentabilidade%</th>
               <th>Total<br /> acumulado</th>
             </tr>
             <tr v-for="(item, index) in simulationResults" :key="index">

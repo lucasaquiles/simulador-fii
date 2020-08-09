@@ -7,7 +7,9 @@
       <p>Com {{simulation.totalInvestiment.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })}} investido em <strong>{{simulation.period}}</strong> {{simulation.period > 1? 'meses': 'mês'}} renderá <strong>{{simulation.totalYeld.toLocaleString('pt-BR',{ style: 'currency', currency: 'BRL' })}}</strong> em dividendos</p>
     </div>
     <div v-if="hasValidationErrors">
-        {{messageValidations}}
+        <ul class="validation-wrapper">
+          <li v-for="(error, index) in messageValidations" :key="index">{{error.content}}</li>
+        </ul>
     </div>
     <div v-if="errorMessage.length > 0">
       {{errorMessage}}
@@ -16,15 +18,16 @@
       <div class="md-layout-item">
         <md-field>
           <label>Código da FII</label>
-          
           <md-input v-model="simulation.fiiCodeSelected" v-on:blur="getFiis" ></md-input>
         </md-field>
       </div>
       <div class="md-layout-item">
+        
         <md-field>
           <label>Tempo de aplicação (meses)</label>
           <md-input v-model="simulation.period" v-on:keyup="update" ></md-input>
         </md-field>
+
       </div>
       <div class="md-layout-item">
         <md-field>
@@ -33,11 +36,12 @@
         </md-field>
       </div>
     </div>
-    <md-button class="md-raised md-primary" v-if="!edited" disabled>Adicionar </md-button>
+    <md-button class="md-raised md-primary" v-if="!edited" disabled>Adicionar</md-button>
     <md-button class="md-raised md-primary" v-on:click="add()" v-if="edited">Adicionar</md-button>
   </div>
 </template>
 <script>
+
 import crawler from '../services/Crawler'
 import CalculatorAction from '../actions/CalculatorAction'
 import CalculatorActionValidator from '../actions/CalculatorActionValidator'
@@ -67,14 +71,10 @@ export default {
       this.messageValidations = validationResult.messages
     },
     update () {
-
       const validationResult = this.validate(this.simulation)
-      
       this.hasValidationErrors = validationResult.hasErrors
       this.messageValidations = validationResult.messages
-
       this.edited = !this.hasValidationErrors
-
       this.simulation.totalYeld = (this.simulation.yeldValue * this.simulation.period) * this.simulation.amount
       this.simulation.totalInvestiment = this.simulation.price * this.simulation.amount
     },
@@ -120,7 +120,7 @@ export default {
     },
     updateIndexValue(array, item) {
       const index = array.findIndex((find) => { 
-              return find.fiiCodeSelected == item.fiiCodeSelected 
+        return find.fiiCodeSelected == item.fiiCodeSelected 
       })
       array[index] = item
     },
@@ -154,3 +154,17 @@ export default {
   }
 }
 </script>
+<style lang="css" scoped>
+  .validation-wrapper{
+    display: block;
+    margin-bottom: 50px;
+    background-color:#ff8585;
+    display: block;
+    border:solid 1px #c00;
+    padding:10px 5px;
+  }
+  .validation-wrapper li{
+    list-style: none;
+
+  }
+</style>
